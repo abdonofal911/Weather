@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {scale, vScale} from '../../theme/Scale';
+import {fontScale, scale, vScale} from '../../theme/Scale';
 import images from '../../assets/images';
 import Colors from '../../theme/Colors';
 import Font from '../../theme/Font';
@@ -11,16 +11,7 @@ const DailyForecastItem = ({item}) => {
   const options = {weekday: 'long'};
   const dayName = new Intl.DateTimeFormat('en-US', options).format(date);
   return (
-    <View
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.lightGray,
-        paddingHorizontal: scale(15),
-        paddingVertical: vScale(20),
-        borderRadius: vScale(20),
-        marginEnd: scale(15),
-      }}>
+    <View style={styles.container}>
       <Image
         source={{uri: `https:${item.day.condition.icon}`}}
         style={{width: scale(35), height: scale(35)}}
@@ -32,6 +23,7 @@ const DailyForecastItem = ({item}) => {
         style={{
           fontFamily: Font.Medium,
           color: Colors.white,
+          fontSize: fontScale(12),
         }}>
         {item.day.maxtemp_c}&#176;
       </Text>
@@ -41,4 +33,14 @@ const DailyForecastItem = ({item}) => {
 
 export default DailyForecastItem;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.lightGray,
+    paddingVertical: vScale(20),
+    borderRadius: vScale(20),
+    marginEnd: scale(12),
+    width: scale(120),
+  },
+});
